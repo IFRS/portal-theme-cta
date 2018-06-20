@@ -1,0 +1,37 @@
+header {
+    background-color: $cor-primaria-azul;
+    @include gradient-vertical($cor-header-inicio, $cor-header-fim);
+
+    a {
+        color: $cor-secundaria-branco;
+
+        &:hover {
+            color: $cor-secundaria-branco;
+        }
+    }
+
+    .title-ifrs {
+        color: #FFFFFF;
+        font-size: 12px;
+        margin-bottom: 0;
+
+        @media screen and (min-width: $screen-sm-min) {
+            margin-top: 15px;
+        }
+    }
+
+    .title-site {
+        color: #FFFFFF;
+        font-size: 40px;
+        font-weight: bolder;
+        margin-bottom: 0;
+
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+#barra-servicos {
+    background-color: $cor-barra-servicos;
+}
