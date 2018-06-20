@@ -21,7 +21,7 @@
     <?php while ($query->have_posts() && $query->current_post < 1) : $query->the_post(); ?>
         <div class="col-xs-12 col-md-6">
             <article class="noticia">
-                    <?php get_template_part('partials/noticias/item'); ?>
+                <?php get_template_part('partials/noticias/item'); ?>
             </article>
         </div>
     <?php endwhile; ?>
@@ -34,10 +34,10 @@
 
 <?php if (is_active_sidebar('widget-docs') || is_active_sidebar('widget-home-side')) : ?>
 <div class="row">
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12<?php echo is_active_sidebar('widget-home-side') ? ' col-md-6' : ''; ?>">
         <?php if (!dynamic_sidebar('widget-docs')) : endif; ?>
     </div>
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12<?php echo is_active_sidebar('widget-docs') ? ' col-md-6' : ''; ?>">
         <?php if (!dynamic_sidebar('widget-home-side')) : endif; ?>
     </div>
 </div>
