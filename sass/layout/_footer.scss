@@ -1,7 +1,7 @@
-footer {
+.footer {
     background-color: $cor-rodape;
-}
 
-#footer-sitemap {
-    background-color: $cor-sitemap;
+    &__info {
+        background-color: $cor-rodape-info;
+    }
 }
