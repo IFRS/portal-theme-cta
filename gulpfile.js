@@ -6,11 +6,23 @@ const sass         = require('gulp-sass');
 const postcss      = require('gulp-postcss');
 const pixrem       = require('pixrem');
 const autoprefixer = require('autoprefixer');
-const flexibility  = require('postcss-flexibility');
 const cssmin       = require('gulp-cssmin');
 const browserSync  = require('browser-sync').create();
 
-const DIST = [
+const browserslist = [
+    'last 3 versions',
+    '>= 1%',
+    'Chrome >= 45',
+    'Firefox >= 38',
+    'Edge >= 12',
+    'Explorer >= 10',
+    'iOS >= 9',
+    'Safari >= 9',
+    'Android >= 4.4',
+    'Opera >= 30'
+];
+
+const dist = [
     '**',
     '!.**',
     '!dist{,/**}',
@@ -30,12 +42,13 @@ gulp.task('sass', function() {
     var postCSSplugins = [
         require('postcss-flexibility'),
         pixrem(),
-        autoprefixer({browsers: ['> 1%', 'last 3 versions', 'ie 8-10', 'not ie <= 7']})
+        autoprefixer({browsers: browserslist})
     ];
     return gulp.src('sass/*.scss')
     .pipe(sass({
         includePaths: 'sass',
-        outputStyle: 'expanded'
+        outputStyle: 'expanded',
+        precision: 8
     }).on('error', sass.logError))
     .pipe(postcss(postCSSplugins))
     .pipe(gulp.dest('css/'))
@@ -51,13 +64,19 @@ gulp.task('styles', gulp.series('sass', function css() {
 }));
 
 gulp.task('dist', function() {
-    return gulp.src(DIST)
+    return gulp.src(dist)
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('default', function() {
+if (argv.production) {
+    gulp.task('build', gulp.series('clean', 'styles', 'dist'));
+} else {
+    gulp.task('build', gulp.series('clean', 'sass'));
+}
+
+gulp.task('default', gulp.series('build', function watch() {
     browserSync.init({
-        ui: false,
+        ghostMode: false,
         notify: false,
         online: false,
         open: false,
@@ -68,10 +87,4 @@ gulp.task('default', function() {
     gulp.watch('sass/**/*.scss', gulp.series('sass'));
 
     gulp.watch('**/*.php').on('change', browserSync.reload);
-});
-
-if (argv.production) {
-    gulp.task('build', gulp.series('clean', 'styles', 'dist'));
-} else {
-    gulp.task('build', gulp.series('clean', 'sass'));
-}
+}));
