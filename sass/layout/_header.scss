@@ -1,6 +1,6 @@
-header {
+.header {
     background-color: $cor-primaria-azul;
-    @include gradient-vertical($cor-header-inicio, $cor-header-fim);
+    @include gradient-x($cor-header-inicio, $cor-header-fim);
 
     a {
         color: $cor-secundaria-branco;
@@ -15,7 +15,7 @@ header {
         font-size: 12px;
         margin-bottom: 0;
 
-        @media screen and (min-width: $screen-sm-min) {
+        @include media-breakpoint-up(md) {
             margin-top: 15px;
         }
     }
@@ -30,8 +30,8 @@ header {
             text-decoration: none;
         }
     }
-}
 
-#barra-servicos {
-    background-color: $cor-barra-servicos;
+    &__barra-servicos {
+        background-color: $cor-barra-servicos;
+    }
 }
