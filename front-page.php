@@ -69,8 +69,6 @@
 <?php endif; ?>
 
 <?php if (is_active_sidebar('widget-banners')) : ?>
-<hr class="banner-separator">
-
 <div class="row">
     <div class="col-12">
         <div class="area-banners">
