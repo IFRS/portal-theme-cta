@@ -1,0 +1,8 @@
+.menu-principal {
+    > .menu-item {
+        > a {
+            border-top: 4px solid $cor-primaria-azul;
+            color: $cor-secundaria-azul-escuro;
+        }
+    }
+}
