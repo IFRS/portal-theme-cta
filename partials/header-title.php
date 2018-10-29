@@ -5,8 +5,8 @@
         <a href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php header_image(); ?>" alt="<?php bloginfo('name'); ?>" class="img-fluid"/></a>
     </div>
 <?php else: ?>
-    <div class="col-12 col-md-2 d-none d-md-block">
-        <a href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/if.png" alt="Logo do IF" class="mx-auto"></a>
+    <div class="col-12 col-md-2 d-none d-md-flex">
+        <a class="mx-auto align-self-center" href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/if.png" alt="Logo do IF"></a>
     </div>
     <div class="col-12 col-md-10">
         <div class="row">
