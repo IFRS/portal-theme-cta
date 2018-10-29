@@ -1,0 +1,25 @@
+.noticia {
+    $n: &;
+
+    &__cartola {
+        color: $cor-primaria-verde;
+
+        > a {
+            color: $cor-primaria-verde;
+        }
+    }
+
+    &__data {
+        color: $cor-primaria-verde;
+    }
+
+    &_destaque {
+        margin-bottom: 15px;
+
+        #{$n}__img {
+            @include media-breakpoint-up(lg) {
+                max-width: 47.5%;
+            }
+        }
+    }
+}
