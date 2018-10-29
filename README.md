@@ -1,5 +1,5 @@
-# IFRS Extra Site Theme
-Tema do [Wordpress](https://wordpress.org/) para os Sites Institucionais extras do [Instituto Federal do Rio Grande do Sul](https://ifrs.edu.br/).
+# IFRS Portal Theme CTA
+Tema [Wordpress](https://wordpress.org) para o [Centro Tecnológico de Acessibilidade](https://cta.ifrs.edu.br) do [Instituto Federal do Rio Grande do Sul](https://ifrs.edu.br).
 
 ## Dependência
 
@@ -10,8 +10,8 @@ Esse tema depende do tema [IFRS Portal Theme](https://github.com/IFRS/portal-the
 ## Uso
 
 Para a construção desse projeto são necessárias as seguintes ferramentas:
--   [NodeJs](https://nodejs.org/) com [NPM](https://www.npmjs.com/)
--   [Gulp CLI](https://gulpjs.com/)
+-   [NodeJs](https://nodejs.org) com [NPM](https://www.npmjs.com)
+-   [Gulp CLI](https://gulpjs.com)
 
 Após, é preciso instalar as dependências:
 
@@ -47,4 +47,4 @@ limpar o projeto:
 
 Esse código é distribuído sob a licença [GNU GPL 3.0](https://www.gnu.org/licenses/gpl-3.0.txt).
 
-A documentação, as imagens e demais mídias são distribuídas sob a licença [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+A documentação, as imagens e demais mídias são distribuídas sob a licença [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0)
