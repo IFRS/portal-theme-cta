@@ -7,7 +7,7 @@ Esse tema depende do tema [IFRS Portal Theme](https://github.com/IFRS/portal-the
 
 `ifrs-portal-theme`
 
-## Uso
+## Desenvolvimento
 
 Para a construção desse projeto são necessárias as seguintes ferramentas:
 -   [NodeJs](https://nodejs.org) com [NPM](https://www.npmjs.com)
@@ -25,23 +25,33 @@ ou, para produção:
 
 `gulp build --production`
 
-Esse projeto possui tarefas separadas para...
+Esse projeto possui tarefas separadas para:
 
-somente compilar os estilos:
+- somente compilar os estilos:
 
 `gulp sass`
 
-compilar e minificar os estilos:
+- compilar e minificar os estilos:
 
-`gulp css`
+`gulp styles`
 
-preparar o projeto e copiar os arquivos para distribuição:
+- preparar o projeto e copiar os arquivos para distribuição:
 
 `gulp dist`
 
-limpar o projeto:
+- limpar o projeto:
 
 `gulp clean`
+
+### Watch
+
+Para observar modificações e rodar um servidor proxy para fazer live reload, execute:
+
+`gulp`
+
+Se o projeto for acessível em outra URL que não "localhost", use o seguinte parâmetro:
+
+`gulp --URL=url_do_projeto`
 
 ## Licença
 
