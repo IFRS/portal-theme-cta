@@ -61,12 +61,16 @@
 
 <?php if (is_active_sidebar('widget-docs') || is_active_sidebar('widget-home-side')) : ?>
     <div class="row">
-        <div class="col-12<?php echo is_active_sidebar('widget-home-side') ? ' col-lg-6' : ''; ?>">
-            <?php if (!dynamic_sidebar('widget-docs')) : endif; ?>
-        </div>
-        <div class="col-12<?php echo is_active_sidebar('widget-docs') ? ' col-lg-6' : ''; ?>">
-            <?php if (!dynamic_sidebar('widget-home-side')) : endif; ?>
-        </div>
+        <?php if (is_active_sidebar('widget-docs')) : ?>
+            <div class="col-12 col-lg">
+                <?php if (!dynamic_sidebar('widget-docs')) : endif; ?>
+            </div>
+        <?php endif; ?>
+        <?php if (is_active_sidebar('widget-home-side')) : ?>
+            <div class="col-12 col-lg">
+                <?php if (!dynamic_sidebar('widget-home-side')) : endif; ?>
+            </div>
+        <?php endif; ?>
     </div>
 <?php endif; ?>
 
