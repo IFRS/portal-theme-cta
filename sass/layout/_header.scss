@@ -14,10 +14,6 @@
         color: #FFFFFF;
         font-size: 12px;
         margin-bottom: 0;
-
-        @include media-breakpoint-up(md) {
-            margin-top: 15px;
-        }
     }
 
     .title-site {
