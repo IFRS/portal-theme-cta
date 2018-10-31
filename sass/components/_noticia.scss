@@ -14,7 +14,7 @@
     }
 
     &_destaque {
-        margin-bottom: 15px;
+        margin-bottom: 30px;
 
         #{$n}__img {
             @include media-breakpoint-up(lg) {
