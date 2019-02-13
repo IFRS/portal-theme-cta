@@ -15,5 +15,9 @@
     "minimist": "^1.2.0",
     "pixrem": "^4.0.1",
     "postcss-flexibility": "^2.0.0"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.7"
   }
 }

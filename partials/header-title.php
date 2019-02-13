@@ -1,8 +1,9 @@
 <div class="row">
 <?php if (get_header_image() != '') : ?>
     <div class="col-12">
-        <h1 class="sr-only"><?php bloginfo('name'); ?></h1>
-        <a href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php header_image(); ?>" alt="<?php bloginfo('name'); ?>" class="img-fluid"/></a>
+        <h1>
+            <a href="<?php echo esc_url(home_url('/')); ?>"><img src="<?php header_image(); ?>" alt="<?php bloginfo('name'); ?>" class="img-fluid"/></a>
+        </h1>
     </div>
 <?php else: ?>
     <div class="col-12 col-md-2 d-none d-md-flex">

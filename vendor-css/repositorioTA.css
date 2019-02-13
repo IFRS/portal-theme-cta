@@ -1,0 +1,12 @@
+.file-list-wrap ul{
+    padding-left: 15px;
+}
+.file-list-wrap ul li{
+    font-size: 12px;
+    word-break: break-all;
+}
+
+abbr {
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
