@@ -1,10 +1,10 @@
 <?php
 
-    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+   // $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
     $args = array(
         'post_type' => 'recurso-ta',
-        'posts_per_page' => 16,
-        'paged' => $paged,
+        'posts_per_page' => 100,
+        'paged' => (get_query_var('paged')) ? get_query_var('paged') : 1,
     );
     $tags = get_tags();
     $tags_selected = array();
@@ -165,6 +165,7 @@
                     </div>
                 </div>
             <?php endforeach; ?>
+            <?php wp_reset_postdata(); ?>
         </div>
     <?php else: ?>
             <p class="text-center">Nenhuma tecnologia assistiva encontrada.</p>

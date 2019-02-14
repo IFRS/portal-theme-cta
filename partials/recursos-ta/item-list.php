@@ -8,29 +8,5 @@
         <?php endif; ?>
         <h3 class="noticia__titulo"><?php the_title(); ?></h3>
         </a>
-
-        <?php //$categoriasTa = get_the_terms($post->ID, 'categorias-ta'); ?> 
-        <?php //$tagsTa = get_the_tags($post->ID); ?> 
-        <!-- <p class="noticia__meta">
-            <?php //if (!empty($categoriasTa)): ?>
-                <span class="noticia__cartola">
-                    Categorias:
-                    <?php //echo join(', ', array_map(function ($wpterm) {
-                        //return $wpterm->name;
-                    //}, $categoriasTa)); ?>
-                </span>
-            <?php //endif ?>
-
-            <?php //if (!empty($tagsTa)): ?>
-                <br/>
-                <span class="noticia__cartola">
-                    Tags:
-                    <?php //echo join(', ', array_map(function ($wpterm) {
-                        //return $wpterm->name;
-                    //}, $tagsTa)); ?>
-                </span>
-            <?php //endif ?>
-        </p> -->
-    
     </div>
 </div>
