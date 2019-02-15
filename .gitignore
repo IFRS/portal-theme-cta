@@ -12,3 +12,5 @@
 
 # Build
 /dist/
+
+.DS_Store

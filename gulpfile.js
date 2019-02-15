@@ -55,12 +55,12 @@ gulp.task('sass', function() {
     .pipe(browserSync.stream());
 });
 
-gulp.task('vendor-css', function () {
-    return gulp.src(['vendor-css/*.css'])
-           .pipe(gulp.dest('css/'));
-});
+// gulp.task('vendor-css', function () {
+//     return gulp.src(['vendor-css/*.css'])
+//            .pipe(gulp.dest('css/'));
+// });
 
-gulp.task('styles', gulp.series('vendor-css', 'sass', function css() {
+gulp.task('styles', gulp.series('sass', function css() {
     return gulp.src(['css/*.css', '!css/*.min.css'])
     .pipe(cssmin())
     .pipe(rename({suffix: '.min'}))
