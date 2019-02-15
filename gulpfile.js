@@ -35,7 +35,7 @@ const dist = [
 ];
 
 gulp.task('clean', function() {
-    return del(['css/', 'dist/']);
+    return del(['css/', 'dist/', 'js/']);
 });
 
 gulp.task('sass', function() {
@@ -55,6 +55,11 @@ gulp.task('sass', function() {
     .pipe(browserSync.stream());
 });
 
+// gulp.task('vendor-css', function () {
+//     return gulp.src(['vendor-css/*.css'])
+//            .pipe(gulp.dest('css/'));
+// });
+
 gulp.task('styles', gulp.series('sass', function css() {
     return gulp.src(['css/*.css', '!css/*.min.css'])
     .pipe(cssmin())
@@ -63,15 +68,20 @@ gulp.task('styles', gulp.series('sass', function css() {
     .pipe(browserSync.stream());
 }));
 
+gulp.task('scripts', function () {
+    return gulp.src(['src/static/*.js'])
+           .pipe(gulp.dest('js/'));
+});
+
 gulp.task('dist', function() {
     return gulp.src(dist)
     .pipe(gulp.dest('dist/'));
 });
 
 if (argv.production) {
-    gulp.task('build', gulp.series('clean', 'styles', 'dist'));
+    gulp.task('build', gulp.series('clean', 'styles', 'scripts', 'dist'));
 } else {
-    gulp.task('build', gulp.series('clean', 'sass'));
+    gulp.task('build', gulp.series('clean', 'styles', 'scripts'));
 }
 
 gulp.task('default', gulp.series('build', function watch() {
