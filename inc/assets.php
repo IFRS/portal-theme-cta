@@ -24,8 +24,9 @@ function cta_load_scripts() {
     //wp_enqueue_script( 'selectWooJSLang', get_theme_file_uri( '/js/selectWoo.pt-BR.js' ));
 
     // Code
-    wp_enqueue_script( 'jquery-static', get_theme_file_uri('/js/jquery.min.js'));
-    wp_enqueue_script( 'repositorioTA', get_theme_file_uri( '/js/repositorioTA.js' ));
+    //wp_enqueue_script( 'jquery-static', get_theme_file_uri('/js/jquery.min.js'));
+    //wp_enqueue_script("jquery");
+    wp_enqueue_script( 'repositorioTA', get_theme_file_uri( '/js/repositorioTA.js' ), array('jquery'), null, true);
 }
 add_action( 'wp_enqueue_scripts', 'cta_load_styles', 2 );
 add_action( 'wp_enqueue_scripts', 'cta_load_scripts', 1 );

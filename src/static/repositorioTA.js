@@ -1,25 +1,25 @@
-$(document).ready(function($){
-    var $all_oembed_videos = $("iframe[src*='youtube']");
+jQuery(document).ready(function(jQuery){
+    var jQueryall_oembed_videos = jQuery("iframe[src*='youtube']");
 
-    $all_oembed_videos.each(function() {
+    jQueryall_oembed_videos.each(function() {
 
-        $(this).removeAttr('height').removeAttr('width').wrap( "<div class='embed-container'></div>" );
+        jQuery(this).removeAttr('height').removeAttr('width').wrap( "<div class='embed-container'></div>" );
 
     });
-    // $('#tag-search').selectWoo({
+    // jQuery('#tag-search').selectWoo({
     //     tags: true,
     //     tokenSeparators: [',']
     // });
-    // $('#categories').selectWoo();
+    // jQuery('#categories').selectWoo();
 
-    $('.tag-recomendacao').click(function(e){
+    jQuery('.tag-recomendacao').click(function(e){
         e.preventDefault();
-        let tags = $('#tag-search').val();
-        let name = $(this).data('name');
+        let tags = jQuery('#tag-search').val();
+        let name = jQuery(this).data('name');
         tags.push(name);
-        $('#tag-search').val(tags);
-        $('#tag-search').trigger('change');
-        $(this).remove();
-        $('#buscar').click();
+        jQuery('#tag-search').val(tags);
+        jQuery('#tag-search').trigger('change');
+        jQuery(this).remove();
+        jQuery('#buscar').click();
     });
 });
