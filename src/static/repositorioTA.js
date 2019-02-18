@@ -1,16 +1,9 @@
-jQuery(document).ready(function(jQuery){
+jQuery(document).ready(function(jQuery) {
     var jQueryall_oembed_videos = jQuery("iframe[src*='youtube']");
 
     jQueryall_oembed_videos.each(function() {
-
         jQuery(this).removeAttr('height').removeAttr('width').wrap( "<div class='embed-container'></div>" );
-
     });
-    // jQuery('#tag-search').selectWoo({
-    //     tags: true,
-    //     tokenSeparators: [',']
-    // });
-    // jQuery('#categories').selectWoo();
 
     jQuery('.tag-recomendacao').click(function(e){
         e.preventDefault();

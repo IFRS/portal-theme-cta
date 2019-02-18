@@ -1,30 +1,18 @@
 <?php
-// Require Post Category Plugin
-function custom_rpc_post_types( $post_types ) {
-    $post_types['recurso-ta'] = array(
-        'categorias-ta' => array(
-        'message' => "Informe a Categoria deste Recurso de TA"
-        )
-    );
-    return $post_types;
-}
-add_filter( 'rpc_post_types', 'custom_rpc_post_types' );
-
-
 function repositorio_query_construct($args){
     $sql = "
             SELECT SQL_CALC_FOUND_ROWS wp_posts.* __tagmatches__ __termsmatches__
                                     __tags__
-            FROM wp_posts 
+            FROM wp_posts
             __joincategory__
             __jointags__
             WHERE
                 (__wherecategory__ AND __wheretags__)
                 AND __whereterms__
-                AND  wp_posts.post_type = 'recurso-ta' 
-                AND (wp_posts.post_status = 'publish') 
-            GROUP BY wp_posts.ID 
-            ORDER BY __matchorder__  wp_posts.post_date DESC 
+                AND  wp_posts.post_type = 'recurso-ta'
+                AND (wp_posts.post_status = 'publish')
+            GROUP BY wp_posts.ID
+            ORDER BY __matchorder__  wp_posts.post_date DESC
             LIMIT __paged__, __perpage__
         ";
 
@@ -137,8 +125,8 @@ function repositorio_query_termos($args, &$whereterms, &$orderterms, &$termsmatc
             foreach ($termArray as $j => $word) {
                 $whereterms .= "
                         (
-                            (wp_posts.post_title LIKE '%" . $word . "%') OR 
-                            (wp_posts.post_excerpt LIKE '%" . $word . "%') OR 
+                            (wp_posts.post_title LIKE '%" . $word . "%') OR
+                            (wp_posts.post_excerpt LIKE '%" . $word . "%') OR
                             (wp_posts.post_content LIKE '%" . $word . "%')
                         ) OR ";
                 if(count($termArray) > 1) {
@@ -152,9 +140,9 @@ function repositorio_query_termos($args, &$whereterms, &$orderterms, &$termsmatc
                 }
             }
         }
-        
+
         $whereterms = rtrim($whereterms, ' OR');
-        
+
         $whereterms .= ' ) ';
 
         $orderterms = '';
@@ -166,11 +154,11 @@ function repositorio_query_termos($args, &$whereterms, &$orderterms, &$termsmatc
 }
 
 function repositorio_sql_ocorrencias($column, $name, $term){
-    $sql = ', 
-            ROUND (   
+    $sql = ',
+            ROUND (
                 (
                     LENGTH('.$column.')
-                    - LENGTH( REPLACE ( LOWER('.$column.'), "'.mb_strtolower($term).'", "") ) 
+                    - LENGTH( REPLACE ( LOWER('.$column.'), "'.mb_strtolower($term).'", "") )
                 ) / LENGTH("'.$term.'")
             ) AS '.$name;
     return $sql;
@@ -227,11 +215,10 @@ function repositorio_query_similar($tags){
         SELECT *
         FROM wp_terms wt
         LEFT JOIN wp_term_taxonomy wtt ON wtt.term_id = wt.term_id
-        LEFT JOIN wp_term_relationship wtr ON wtr.term_taxonomy_id = wtt.term_taxonomy_id 
-        
+        LEFT JOIN wp_term_relationship wtr ON wtr.term_taxonomy_id = wtt.term_taxonomy_id
+
     ';
 }
 
 // CMB2
 include('cmb2.php');
-

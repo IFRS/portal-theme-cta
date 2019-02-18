@@ -64,12 +64,3 @@
         <?php cmb2_output_file_list('_infos_recurso_ta_arquivos'); ?>
     </div>
 </div>
-
-<style type="text/css">
-    .video-container {
-        width: 50%;
-        display: block;
-        float: left;
-        padding: 1%;
-    }
-</style>

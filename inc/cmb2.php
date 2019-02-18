@@ -56,8 +56,7 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
             ),
         ));
 
-
-        //Vídeos
+        //vídeos
         $cmb->add_field(array(
             'name'    => 'Vídeos',
             'desc'    => 'Links do YouTube',
@@ -68,6 +67,33 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
                 'add_row_text' => "+ Vídeo"
             ),
         ));
+
+
+        // categorias-ta Taxonomy
+        $categorias_ta_metabox = new_cmb2_box( array(
+            'id'           => 'categorias_ta_taxonomy_metabox',
+            'title'        => 'Categorias de TA',
+            'object_types' => array( 'recurso-ta' ),
+            'context'      => 'side',
+            'priority'     => 'low',
+            'show_names'   => false,
+        ) );
+
+        $categorias_ta_metabox->add_field( array(
+            'id'                => $prefix . 'categorias_ta_taxonomy',
+            'name'              => 'Categorias de TA',
+            'taxonomy'          => 'categorias-ta',
+            'type'              => 'taxonomy_multicheck_hierarchical',
+            'show_option_none'  => false,
+            'select_all_button' => false,
+            'text'              => array(
+                'no_terms_text' => 'Não há Categorias de TA cadastradas. Cadastre uma Categoria de TA antes de cadastrar um Recurso.'
+            ),
+            'remove_default'    => 'true',
+            'attributes' => array(
+                'required' => 'required',
+            ),
+        ) );
     }
 
     /**
@@ -80,9 +106,9 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
         // Get the list of files
         $files = get_post_meta( get_the_ID(), $file_list_meta_key, true );
         echo '<div class="image-list-wrap">';
-        
+
         if (!empty($files)) {
-            foreach ($files as $attachment_id => $attachment_url) {                
+            foreach ($files as $attachment_id => $attachment_url) {
                 echo '<div class="wp-caption" >';
                 echo '<a rel="arquivos[galeria]" href="'.wp_get_attachment_image_src($attachment_id, 'large')[0].'" >';
                 echo wp_get_attachment_image($attachment_id);
@@ -90,7 +116,7 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
                 echo '</a>';
                 echo '</div>';
             }
-        } 
+        }
         echo '</div>';
     }
 
@@ -135,5 +161,3 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
 
 
 }
-
-

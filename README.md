@@ -10,7 +10,7 @@ Esse tema depende do tema [IFRS Portal Theme](https://github.com/IFRS/portal-the
 ### Plugins do Wordpress utilizados pelo Repositório de Tecnologia Assistiva
 
 -	[CMB2](https://github.com/CMB2/CMB2)
--	[Require Post Category](https://www.warpconduit.net/wordpress-plugins/require-post-category/)
+
 
 ## Desenvolvimento
 

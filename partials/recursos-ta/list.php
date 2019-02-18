@@ -77,7 +77,7 @@
         $args['tag'] = $param_tag;
     }
     
-
+    global $wpdb;
     $sql = repositorio_query_construct($args);
     $pageposts = $wpdb->get_results($sql, OBJECT);
     //print($sql);
