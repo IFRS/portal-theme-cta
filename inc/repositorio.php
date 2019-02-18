@@ -1,18 +1,25 @@
 <?php
+
+function get_table_prefix() {
+    global $wpdb;
+    return $wpdb->base_prefix;
+}
+
 function repositorio_query_construct($args){
+    $tp = get_table_prefix();
     $sql = "
-            SELECT SQL_CALC_FOUND_ROWS wp_posts.* __tagmatches__ __termsmatches__
+            SELECT SQL_CALC_FOUND_ROWS {$tp}posts.* __tagmatches__ __termsmatches__
                                     __tags__
-            FROM wp_posts
+            FROM {$tp}posts
             __joincategory__
             __jointags__
             WHERE
                 (__wherecategory__ AND __wheretags__)
                 AND __whereterms__
-                AND  wp_posts.post_type = 'recurso-ta'
-                AND (wp_posts.post_status = 'publish')
-            GROUP BY wp_posts.ID
-            ORDER BY __matchorder__  wp_posts.post_date DESC
+                AND  {$tp}posts.post_type = 'recurso-ta'
+                AND ({$tp}posts.post_status = 'publish')
+            GROUP BY {$tp}posts.ID
+            ORDER BY __matchorder__  {$tp}posts.post_date DESC
             LIMIT __paged__, __perpage__
         ";
 
@@ -72,14 +79,15 @@ function repositorio_query_construct($args){
 }
 
 function repositorio_query_categoria($args, &$joincategory, &$wherecategory){
+    $tp = get_table_prefix();
     if(isset($args['tax_query']) && !empty($args['tax_query'])){
         $tax_queries = $args['tax_query'];
         $cat_ids = array();
         foreach($tax_queries as $tax_query){
             $cat_ids[] = $tax_query['terms'][0];
         }
-        $joincategory = "LEFT JOIN wp_term_relationships ON (wp_posts.ID = wp_term_relationships.object_id)";
-        $wherecategory = "wp_term_relationships.term_taxonomy_id IN (".implode(',', $cat_ids).")";
+        $joincategory = "LEFT JOIN {$tp}term_relationships ON ({$tp}posts.ID = {$tp}term_relationships.object_id)";
+        $wherecategory = "{$tp}term_relationships.term_taxonomy_id IN (".implode(',', $cat_ids).")";
     }else{
         $joincategory = ' ';
         $wherecategory = ' 1=1 ';
@@ -87,13 +95,14 @@ function repositorio_query_categoria($args, &$joincategory, &$wherecategory){
 }
 
 function repositorio_query_tags($args, &$tagMatches, &$jointags, &$wheretags, &$orderTag, &$countTerms, &$tags){
+    $tp = get_table_prefix();
     if(isset($args['tag']) && !empty($args['tag'])){
         $tags = explode('+', $args['tag']);
         $finalTags = array();
         foreach($tags as $tag){
             $finalTags[] = get_term_by('slug', $tag, 'post_tag')->term_id;
         }
-        $jointags = "LEFT JOIN wp_term_relationships AS tt1 ON (wp_posts.ID = tt1.object_id)";
+        $jointags = "LEFT JOIN {$tp}term_relationships AS tt1 ON ({$tp}posts.ID = tt1.object_id)";
         $wheretags = " tt1.term_taxonomy_id IN (".implode(',', $finalTags).")";
         $tagMatches = ', COUNT(tt1.term_taxonomy_id) as tag_matches ';
         $countTerms['tags'][] = 'COUNT(tt1.term_taxonomy_id)';
@@ -109,6 +118,8 @@ function repositorio_query_tags($args, &$tagMatches, &$jointags, &$wheretags, &$
 }
 
 function repositorio_query_termos($args, &$whereterms, &$orderterms, &$termsmatches, &$countTerms){
+    $tp = get_table_prefix();
+
     if (isset($args['s']) && !empty($args['s'])) {//terms
         $terms = explode('+', $args['s']);
         $whereterms = ' ( ';
@@ -116,8 +127,8 @@ function repositorio_query_termos($args, &$whereterms, &$orderterms, &$termsmatc
         foreach ($terms as $i => $term) {
             $termArray = explode(' ', $term);
 
-            $termsmatches .= repositorio_sql_ocorrencias('wp_posts.post_title', 'term_matches_title_'.$i, $term);
-            $termsmatches .= repositorio_sql_ocorrencias('wp_posts.post_content', 'term_matches_content_'.$i, $term);
+            $termsmatches .= repositorio_sql_ocorrencias('{$tp}posts.post_title', 'term_matches_title_'.$i, $term);
+            $termsmatches .= repositorio_sql_ocorrencias('{$tp}posts.post_content', 'term_matches_content_'.$i, $term);
 
             $countTerms['title']['full'][] = 'term_matches_title_'.$i;
             $countTerms['content']['full'][] = 'term_matches_content_'.$i;
@@ -125,14 +136,14 @@ function repositorio_query_termos($args, &$whereterms, &$orderterms, &$termsmatc
             foreach ($termArray as $j => $word) {
                 $whereterms .= "
                         (
-                            (wp_posts.post_title LIKE '%" . $word . "%') OR
-                            (wp_posts.post_excerpt LIKE '%" . $word . "%') OR
-                            (wp_posts.post_content LIKE '%" . $word . "%')
+                            ({$tp}posts.post_title LIKE '%" . $word . "%') OR
+                            ({$tp}posts.post_excerpt LIKE '%" . $word . "%') OR
+                            ({$tp}posts.post_content LIKE '%" . $word . "%')
                         ) OR ";
                 if(count($termArray) > 1) {
-                    $termsmatches .= repositorio_sql_ocorrencias('wp_posts.post_title',
+                    $termsmatches .= repositorio_sql_ocorrencias('{$tp}posts.post_title',
                         'term_matches_title_' . $i . '_' . $j, $word);
-                    $termsmatches .= repositorio_sql_ocorrencias('wp_posts.post_content',
+                    $termsmatches .= repositorio_sql_ocorrencias('{$tp}posts.post_content',
                         'term_matches_content_' . $i . '_' . $j, $word);
 
                     $countTerms['title']['words'][] = 'term_matches_title_' . $i . '_' . $j;
@@ -211,11 +222,12 @@ function repositorio_query_bestMatch($countTerms){
 }
 
 function repositorio_query_similar($tags){
+    $tp = get_table_prefix();
     $sql = '
         SELECT *
-        FROM wp_terms wt
-        LEFT JOIN wp_term_taxonomy wtt ON wtt.term_id = wt.term_id
-        LEFT JOIN wp_term_relationship wtr ON wtr.term_taxonomy_id = wtt.term_taxonomy_id
+        FROM {$tp}terms wt
+        LEFT JOIN {$tp}term_taxonomy wtt ON wtt.term_id = wt.term_id
+        LEFT JOIN {$tp}term_relationship wtr ON wtr.term_taxonomy_id = wtt.term_taxonomy_id
 
     ';
 }
