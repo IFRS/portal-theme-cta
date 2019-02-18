@@ -75,6 +75,7 @@ function repositorio_query_construct($args){
                      $whereterms, $paged, $perpage, $tagMatches, $termsmatches,
                      $bestMatch, $tags);
 
+    if (WP_DEBUG) echo str_replace($search, $replace, $sql);
     return str_replace($search, $replace, $sql);
 }
 
@@ -127,8 +128,8 @@ function repositorio_query_termos($args, &$whereterms, &$orderterms, &$termsmatc
         foreach ($terms as $i => $term) {
             $termArray = explode(' ', $term);
 
-            $termsmatches .= repositorio_sql_ocorrencias('{$tp}posts.post_title', 'term_matches_title_'.$i, $term);
-            $termsmatches .= repositorio_sql_ocorrencias('{$tp}posts.post_content', 'term_matches_content_'.$i, $term);
+            $termsmatches .= repositorio_sql_ocorrencias("{$tp}posts.post_title", 'term_matches_title_' . $i, $term);
+            $termsmatches .= repositorio_sql_ocorrencias("{$tp}posts.post_content", 'term_matches_content_' . $i, $term);
 
             $countTerms['title']['full'][] = 'term_matches_title_'.$i;
             $countTerms['content']['full'][] = 'term_matches_content_'.$i;
@@ -141,9 +142,9 @@ function repositorio_query_termos($args, &$whereterms, &$orderterms, &$termsmatc
                             ({$tp}posts.post_content LIKE '%" . $word . "%')
                         ) OR ";
                 if(count($termArray) > 1) {
-                    $termsmatches .= repositorio_sql_ocorrencias('{$tp}posts.post_title',
+                    $termsmatches .= repositorio_sql_ocorrencias("{$tp}posts.post_title",
                         'term_matches_title_' . $i . '_' . $j, $word);
-                    $termsmatches .= repositorio_sql_ocorrencias('{$tp}posts.post_content',
+                    $termsmatches .= repositorio_sql_ocorrencias("{$tp}posts.post_content",
                         'term_matches_content_' . $i . '_' . $j, $word);
 
                     $countTerms['title']['words'][] = 'term_matches_title_' . $i . '_' . $j;
@@ -223,13 +224,13 @@ function repositorio_query_bestMatch($countTerms){
 
 function repositorio_query_similar($tags){
     $tp = get_table_prefix();
-    $sql = '
+    $sql = "
         SELECT *
         FROM {$tp}terms wt
         LEFT JOIN {$tp}term_taxonomy wtt ON wtt.term_id = wt.term_id
         LEFT JOIN {$tp}term_relationship wtr ON wtr.term_taxonomy_id = wtt.term_taxonomy_id
 
-    ';
+    ";
 }
 
 // CMB2

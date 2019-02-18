@@ -165,7 +165,6 @@
                     </div>
                 </div>
             <?php endforeach; ?>
-            <?php wp_reset_postdata(); ?>
         </div>
     <?php else: ?>
             <p class="text-center">Nenhuma tecnologia assistiva encontrada.</p>
