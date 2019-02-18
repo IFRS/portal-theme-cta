@@ -2,7 +2,7 @@
 
 function get_table_prefix() {
     global $wpdb;
-    return $wpdb->base_prefix;
+    return $wpdb->prefix;
 }
 
 function repositorio_query_construct($args){
