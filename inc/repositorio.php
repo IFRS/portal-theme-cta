@@ -65,7 +65,9 @@ function repositorio_query_construct($args){
     if(isset($args['posts_per_page']))
         $perpage = $args['posts_per_page'];
     else
-        $perpage = '';
+        $perpage = 0;
+
+    $paged = $paged * $perpage;
 
 
     $search = array('__joincategory__', '__jointags__', '__wherecategory__', '__wheretags__',

@@ -1,10 +1,11 @@
 <?php
 
-   // $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+    $paged = (get_query_var('page')) ? get_query_var('page') : 1;
+    $per_page = 16;
     $args = array(
         'post_type' => 'recurso-ta',
-        'posts_per_page' => 100,
-        'paged' => (get_query_var('paged')) ? get_query_var('paged') : 1,
+        'posts_per_page' => $per_page,
+        'paged' => $paged,
     );
     $tags = get_tags();
     $tags_selected = array();
@@ -80,7 +81,7 @@
     global $wpdb;
     $sql = repositorio_query_construct($args);
     $pageposts = $wpdb->get_results($sql, OBJECT);
-    //print($sql);
+    $total_pages = $wpdb->get_var("SELECT FOUND_ROWS()");
     $tags_selected_ids = array();
     foreach($pageposts as $post){
         if(!isset($post->tags))
@@ -173,7 +174,29 @@
     <div class="row">
         <div class="col-12">
             <nav class="text-center">
-                <?php echo portal_pagination(); ?>
+                <?php
+                     $pagination_links =  paginate_links( array(
+                        'base' => add_query_arg( 'page', '%#%' ),
+                        'format' => '',
+                        'prev_text' => __('&laquo;'),
+                        'next_text' => __('&raquo;'),
+                        'total' => ceil($total_pages / $per_page),
+                        'current' => $paged,
+                        'type' => 'array'
+                    ));
+
+                    if ( is_array( $pagination_links ) ) {
+                        echo '<ul class="pagination">';
+                        foreach ( $pagination_links as $pl ) {
+                            if (strpos($pl, 'current') !== false) {
+                                echo '<li class="page-item active">'.$pl.'</li>';
+                            } else {
+                                echo '<li class="page-item">'.$pl.'</li>';
+                            }
+                        }
+                        echo '</ul>';
+                    }
+                ?>
             </nav>
         </div>
     </div>
