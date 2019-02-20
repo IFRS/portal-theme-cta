@@ -77,7 +77,7 @@ function repositorio_query_construct($args){
                      $whereterms, $paged, $perpage, $tagMatches, $termsmatches,
                      $bestMatch, $tags);
 
-    if (WP_DEBUG) echo str_replace($search, $replace, $sql);
+    //if (WP_DEBUG) echo str_replace($search, $replace, $sql);
     return str_replace($search, $replace, $sql);
 }
 
