@@ -173,7 +173,7 @@
 
     <div class="row">
         <div class="col-12">
-            <nav class="text-center">
+            <nav class="nav-pagination">
                 <?php
                      $pagination_links =  paginate_links( array(
                         'base' => add_query_arg( 'page', '%#%' ),
