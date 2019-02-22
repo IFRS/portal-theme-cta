@@ -91,7 +91,8 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
             ),
             'remove_default'    => 'true',
             'attributes' => array(
-                'required' => 'required',
+                // Required desabilitado pois todas as checkbox tornam-se requeridas.
+                //'required' => 'required',
             ),
         ) );
     }
