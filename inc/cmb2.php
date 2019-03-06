@@ -68,6 +68,7 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
             ),
         ));
 
+
         // categorias-ta Taxonomy
         $categorias_ta_metabox = new_cmb2_box( array(
             'id'           => 'categorias_ta_taxonomy_metabox',
@@ -90,7 +91,8 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
             ),
             'remove_default'    => 'true',
             'attributes' => array(
-                'required' => 'required',
+                // Required desabilitado pois todas as checkbox tornam-se requeridas.
+                //'required' => 'required',
             ),
         ) );
     }
