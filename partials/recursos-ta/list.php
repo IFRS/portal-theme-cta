@@ -1,5 +1,5 @@
 <?php
-
+    
     $paged = (get_query_var('page')) ? get_query_var('page') : 1;
     $per_page = 16;
     $args = array(

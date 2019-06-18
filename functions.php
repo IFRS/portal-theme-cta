@@ -10,3 +10,10 @@ require_once('inc/menus.php');
 
 // Repositório CTA
 require_once('inc/repositorio.php');
+
+
+// function custom_mime_types ($mimes) {
+//     $mimes['stl'] = 'application/octet-stream';
+//     return $mimes;
+// }
+// add_filter('mime_types', 'custom_mime_types');
