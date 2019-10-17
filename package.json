@@ -2,10 +2,10 @@
   "name": "ifrs-portal-theme-cta",
   "private": true,
   "devDependencies": {
-    "autoprefixer": "^9.6.0",
+    "autoprefixer": "^9.6.5",
     "bootstrap": "^4.3.1",
     "browser-sync": "^2.26.7",
-    "del": "^4.1.1",
+    "del": "^5.1.0",
     "flexibility": "^2.0.1",
     "gulp": "^4.0.2",
     "gulp-cssmin": "^0.2.0",
