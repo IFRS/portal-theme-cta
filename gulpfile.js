@@ -9,30 +9,7 @@ const autoprefixer = require('autoprefixer');
 const cssmin       = require('gulp-cssmin');
 const browserSync  = require('browser-sync').create();
 
-const browserslist = [
-    'last 3 versions',
-    '>= 1%',
-    'Chrome >= 45',
-    'Firefox >= 38',
-    'Edge >= 12',
-    'Explorer >= 10',
-    'iOS >= 9',
-    'Safari >= 9',
-    'Android >= 4.4',
-    'Opera >= 30'
-];
-
-const dist = [
-    '**',
-    '!.**',
-    '!dist{,/**}',
-    '!node_modules{,/**}',
-    '!sass{,/**}',
-    '!src{,/**}',
-    '!gulpfile.js',
-    '!package.json',
-    '!package-lock.json'
-];
+const proxyURL = argv.URL || argv.url || 'localhost';
 
 gulp.task('clean', function() {
     return del(['css/', 'dist/', 'js/']);
@@ -42,7 +19,7 @@ gulp.task('sass', function() {
     var postCSSplugins = [
         require('postcss-flexibility'),
         pixrem(),
-        autoprefixer({browsers: browserslist})
+        autoprefixer()
     ];
     return gulp.src('sass/*.scss')
     .pipe(sass({
@@ -66,11 +43,20 @@ gulp.task('styles', gulp.series('sass', function css() {
 gulp.task('scripts', function () {
     return gulp.src(['src/static/*.js'])
     .pipe(gulp.dest('js/'));
-
 });
 
 gulp.task('dist', function() {
-    return gulp.src(dist)
+    return gulp.src(
+        '**',
+        '!.**',
+        '!dist{,/**}',
+        '!node_modules{,/**}',
+        '!sass{,/**}',
+        '!src{,/**}',
+        '!gulpfile.js',
+        '!package.json',
+        '!package-lock.json'
+    )
     .pipe(gulp.dest('dist/'));
 });
 
@@ -78,7 +64,6 @@ if (argv.production) {
     gulp.task('build', gulp.series('clean', 'styles', 'scripts', 'dist'));
 } else {
     gulp.task('build', gulp.series('clean', 'sass', 'scripts'));
-
 }
 
 gulp.task('default', gulp.series('build', function watch() {
@@ -87,8 +72,8 @@ gulp.task('default', gulp.series('build', function watch() {
         notify: false,
         online: false,
         open: false,
-        host: argv.URL || 'localhost',
-        proxy: argv.URL || 'localhost',
+        host: proxyURL,
+        proxy: proxyURL,
     });
 
     gulp.watch('sass/**/*.scss', gulp.series('sass'));
