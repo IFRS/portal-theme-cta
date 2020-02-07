@@ -15,11 +15,5 @@
 
     &_destaque {
         margin-bottom: 30px;
-
-        #{$n}__img {
-            @include media-breakpoint-up(lg) {
-                max-width: 47.5%;
-            }
-        }
     }
 }
