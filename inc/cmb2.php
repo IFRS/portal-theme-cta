@@ -106,9 +106,10 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
 
         // Get the list of files
         $files = get_post_meta( get_the_ID(), $file_list_meta_key, true );
-        echo '<div class="image-list-wrap">';
 
         if (!empty($files)) {
+            echo '<h3>Imagens</h3>';
+            echo '<div class="image-list-wrap">';
             foreach ($files as $attachment_id => $attachment_url) {
                 echo '<div class="wp-caption" >';
                 echo '<a rel="arquivos[galeria]" href="'.wp_get_attachment_image_src($attachment_id, 'large')[0].'" >';
@@ -131,7 +132,8 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
         // Get the list of files
         $files = get_post_meta( get_the_ID(), $file_list_meta_key, 1 );
         if(!empty($files)){
-            echo '<div class="file-list-wrap">Downloads:<ul>';
+            echo '<h3>Arquivos</h3>';
+            echo '<div class="file-list-wrap"><ul>';
             foreach($files as $id => $url){
                 $name = basename(get_attached_file( $id ));
                 echo '<li><a target="blank" href="'.$url.'">'.$name.'</a></li>';
@@ -141,7 +143,6 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
         }
     }
 
-
     /**
      * Outputs the file list
      *
@@ -150,12 +151,15 @@ if ( file_exists(__DIR__ . '/../../../plugins/cmb2/init.php') ) {
     function cmb2_output_video_list($meta){
         $videos = get_post_meta( get_the_ID(), $meta, 1 );
         if(!empty($videos)){
+            echo '<div class="col-lg-12"> <h3>Vídeos</h3> </div>';
+            echo '<div class="col-lg-12">';
             echo '<div class="video-list-wrap">';
             foreach($videos as $url){
                 echo '<div class="video-container">';
                 echo wp_oembed_get(esc_url($url), ['width' => '100%']);
                 echo '</div>';
             }
+            echo '</div>';
             echo '</div>';
         }
     }

@@ -39,17 +39,15 @@
                         <?php endif; ?>
                         <?php the_content(); ?>
                         <div class="row">
-                            <div class="col-lg-12">
-                                <h3>Vídeos</h3>
-                            </div>
-                            <div class="col-lg-12">
-                                <?php cmb2_output_video_list('_infos_recurso_ta_videos'); ?>
-                            </div>
+                            <?php cmb2_output_video_list('_infos_recurso_ta_videos'); ?>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <h3>Palavras-chave</h3>
-                                <?php echo get_the_tag_list('', ', &nbsp;'); ?>
+                                <?php $keywords = get_the_tag_list('', ', &nbsp;'); ?>
+                                <?php if ($keywords): ?> 
+                                    <h3>Palavras-chave</h3>
+                                    <?= $keywords ?>
+                                <?php endif ?>
                             </div>
                         </div>
                     </div>
@@ -58,9 +56,7 @@
         </article>
     </div>
     <div class="col-12 col-lg-3">
-        <h3>Arquivos</h3>
-
-        <?php cmb2_output_image_list('_infos_recurso_ta_imagens') ?>
         <?php cmb2_output_file_list('_infos_recurso_ta_arquivos'); ?>
+        <?php cmb2_output_image_list('_infos_recurso_ta_imagens') ?>
     </div>
 </div>
