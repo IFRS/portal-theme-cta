@@ -43,7 +43,6 @@ gulp.task('styles', gulp.series('sass', function css() {
 gulp.task('scripts', function () {
     return gulp.src(['src/static/*.js'])
     .pipe(gulp.dest('js/'));
-
 });
 
 gulp.task('dist', function() {
@@ -65,7 +64,6 @@ if (argv.production) {
     gulp.task('build', gulp.series('clean', 'styles', 'scripts', 'dist'));
 } else {
     gulp.task('build', gulp.series('clean', 'sass', 'scripts'));
-
 }
 
 gulp.task('default', gulp.series('build', function watch() {
