@@ -12,7 +12,7 @@
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^4.0.2",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.2",
     "pixrem": "^5.0.0",
     "postcss-flexibility": "^2.0.0"
   }
